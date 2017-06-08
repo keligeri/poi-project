@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * {@link JdbcDao} class responsible for config file reading
+ * {@link JdbcConnector} class responsible for config file reading
  * and setup the required params for the connection.
  * <p>
  * Read the necessary parameter from the config gile (resources/connection.properties)
@@ -19,16 +19,16 @@ import java.util.List;
  * @author gem
  * @version 1.8
  */
-public class JdbcDao {
+public class JdbcConnector {
 
     private static String filePath = "src/main/resources/";
-    private static String dbUrl;
-    private static String dbUser;
-    private static String dbPassword;
+    private static String DB_URL;
+    private static String DB_USER;
+    private static String DB_PASSWORD;
 
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -38,9 +38,9 @@ public class JdbcDao {
     public static void setupUserAndPasswordFromFile(String fileName) {
         try {
             List<String> allLinesList = Files.readAllLines(Paths.get(filePath + fileName));
-            dbUrl = "jdbc:postgresql://" + allLinesList.get(0) + "/" + allLinesList.get(1);
-            dbUser = allLinesList.get(2);
-            dbPassword = allLinesList.get(3);
+            DB_URL = "jdbc:postgresql://" + allLinesList.get(0) + "/" + allLinesList.get(1);
+            DB_USER = allLinesList.get(2);
+            DB_PASSWORD = allLinesList.get(3);
         } catch (IOException ioException){
             ioException.printStackTrace();
         }
