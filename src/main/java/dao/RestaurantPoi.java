@@ -1,6 +1,6 @@
 package dao;
 
-import jdbc.JdbcDao;
+import jdbc.JdbcConnector;
 import model.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,12 +10,12 @@ import java.sql.SQLException;
 /**
  * The {@link RestaurantPoi} class responsible to execute the queries with {@link PreparedStatement}.
  * <p>
- * This class implements the PointDao interface and extends from the JdbcDao.
+ * This class implements the PointDao interface and extends from the JdbcConnector.
  *
  * @author      Kelemen Gergo
  * @version     1.8
  */
-public class RestaurantPoi extends JdbcDao implements PointDao {
+public class RestaurantPoi extends JdbcConnector implements PointDao {
 
     /**
      * Overrided method, from the PointDao interface.

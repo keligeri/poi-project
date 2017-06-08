@@ -1,7 +1,7 @@
 import controller.Controller;
 import dao.PointDao;
 import dao.RestaurantPoi;
-import jdbc.JdbcDao;
+import jdbc.JdbcConnector;
 import model.Point;
 import org.json.simple.JSONObject;
 import spark.Request;
@@ -18,7 +18,7 @@ public class Main {
     private static Controller controller = new Controller();
 
     public static void main(String[] args) {
-        JdbcDao.setupUserAndPasswordFromFile("connection.properties");
+        JdbcConnector.setupUserAndPasswordFromFile("connection.properties");
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(9999);
@@ -33,7 +33,7 @@ public class Main {
             double xCoord = Double.parseDouble(req.params(":x"));
             double yCoord = Double.parseDouble(req.params(":y"));
             System.out.println(xCoord);
-            nearestPoint = controller.calculateNearestPoint(xCoord, yCoord);
+            nearestPoint = controller.calculateNearestFromLastSearchedPoint();
             System.out.println(xCoord + " --> " +  yCoord);
             res.type("application/json");
             return "{\"message\":\"Custom 500 handling\"}";

@@ -33,11 +33,9 @@ public class Controller {
     /**
      * Calculate the nearest point and based on the x and y coordinates.
      *
-     * @param xCoord {@link Double} the point's x coordinate
-     * @param yCoord {@link Double} the point's y coordinate
      * @return with the nearest point ({@link Point} instance)
      */
-    public Point calculateNearestPoint(double xCoord, double yCoord) {
+    public Point calculateNearestFromLastSearchedPoint() {
         Point foundedPoint = pointDao.getNearestPoint();
 
         double minDistance = pointDao.getNearestDistance();
